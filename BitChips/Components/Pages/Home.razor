@@ -4,10 +4,10 @@
 <PageTitle>Home</PageTitle>
 
 <BitDropdown @bind-Values="Values"
-TItem="BitDropdownItem<string>" TValue="string"
-Virtualize MultiSelect Chips Combo
-ShowClearButton ShowSearchBox
-ItemsProvider="SearchAsync" />
+             TItem="BitDropdownItem<string>" TValue="string"
+             Virtualize MultiSelect Chips Combo
+             ShowClearButton ShowSearchBox
+             ItemsProvider="SearchAsync" />
 
 <ul>
     @foreach (var value in Values)
@@ -22,21 +22,13 @@ ItemsProvider="SearchAsync" />
     private async ValueTask<BitDropdownItemsProviderResult<BitDropdownItem<string>>> SearchAsync(
         BitDropdownItemsProviderRequest<BitDropdownItem<string>> request)
     {
-        try
-        {
-            await Task.Delay(100);
-            List<BitDropdownItem<string>> results = new() {
-                new BitDropdownItem<string>
-                {
-                    Text = request.Search,
-                    Value = request.Search
-                }
-            };
-            return BitDropdownItemsProviderResult.From(results, results.Count);
-        }
-        catch
-        {
-            return BitDropdownItemsProviderResult.From(new List<BitDropdownItem<string>>(), 0);
-        }
+        List<BitDropdownItem<string>> results = new() {
+            new BitDropdownItem<string>
+            {
+                Text = request.Search,
+                Value = request.Search
+            }
+        };
+        return BitDropdownItemsProviderResult.From(results, results.Count);
     }
 }
